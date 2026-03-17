@@ -1,5 +1,5 @@
 # Utilise une image de base Node.js
-FROM node:18
+FROM node:20
 
 # Définir le répertoire de travail
 WORKDIR /app
@@ -13,14 +13,11 @@ RUN npm install -g pnpm
 # Installer les dépendances du projet
 RUN pnpm install
 
-# Installer Prisma CLI si nécessaire
-RUN pnpm install prisma --save-dev
-
 # Copier le code source
 COPY . .
 
 # Générer le client Prisma
-RUN pnpx prisma generate
+RUN pnpm exec prisma generate
 
 # Exposer le port que ton API utilise
 EXPOSE 8080
